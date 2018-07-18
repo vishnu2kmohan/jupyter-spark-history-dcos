@@ -27,6 +27,6 @@ def load_jupyter_server_extension(nbapp):  # pragma: no cover
         r'.*',  # match any host
         [(spark_history.proxy_url + '.*', 
           SparkHistoryHandler, 
-          {'sparkhistory': spark_history})]
+          {'spark_history': spark_history})]
     )
     nbapp.log.info("Jupyter-Spark-History enabled!")
