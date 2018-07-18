@@ -59,7 +59,7 @@ class SparkHistory(LoggingConfigurable):
 
         with
 
-        /spark/static/styles.css
+        /sparkhistory/static/styles.css
         """
         soup = BeautifulSoup(content, BEAUTIFULSOUP_BUILDER)
         for tags, attribute in PROXY_ATTRIBUTES:
