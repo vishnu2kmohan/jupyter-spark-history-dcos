@@ -31,7 +31,7 @@ class SparkHistory(LoggingConfigurable):
     """
     url = Unicode(
         'http://{}:{}'.format(
-            os.getenv('MESOS_CONTAINER_IP', 127.0.0.1),
+            os.getenv('MESOS_CONTAINER_IP', '127.0.0.1'),
             os.getenv('PORT_SPARKHISTORY', '18080'),
         help='The URL of Spark History Server',
     ).tag(config=True)
