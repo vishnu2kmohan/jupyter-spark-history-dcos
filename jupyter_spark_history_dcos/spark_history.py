@@ -14,8 +14,8 @@ except ImportError:
 else:
     BEAUTIFULSOUP_BUILDER = 'lxml'  # pragma: no cover
 
-# a regular expression to match paths against the Spark on EMR proxy paths
-PROXY_PATH_RE = re.compile(r'\/proxy\/application_\d+_\d+\/(.*)')
+# a regular expression to match paths against the Spark History Server API
+PROXY_PATH_RE = re.compile(r'\/api\/.*')
 
 # a tuple of tuples with tag names and their attribute to automatically fix
 PROXY_ATTRIBUTES = (
@@ -38,7 +38,7 @@ class SparkHistory(LoggingConfigurable):
 
     proxy_root = Unicode(
         '/sparkhistory',
-        help='The URL path under which the Spark History Server will be proxied',
+        help='The URL path under which the Spark History will be proxied',
     )
 
     def __init__(self, *args, **kwargs):

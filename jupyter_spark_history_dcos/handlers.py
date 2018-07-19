@@ -28,9 +28,9 @@ class SparkHistoryHandler(IPythonHandler):
             backend_ip = os.getenv('MESOS_CONTAINER_IP', '127.0.0.1')
             backend_port = os.getenv('PORT_SPARKHISTORY', '18080')
             content_type = 'application/json'
-            content = json.dumps({'error': 'SPARK_HISTORY_SERVER_NOT_RUNNING'},
-                                 {'backend_ip': backend_ip},
-                                 {'backend_port': backend_port})
+            content = json.dumps({'error': 'SPARK_HISTORY_SERVER_NOT_RUNNING',
+                                  'backend_ip': backend_ip,
+                                  'backend_port': backend_port})
         else:
             content_type = response.headers['Content-Type']
             if 'text/html' in content_type:
