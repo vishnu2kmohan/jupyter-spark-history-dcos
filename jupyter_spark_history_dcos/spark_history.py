@@ -14,9 +14,6 @@ except ImportError:
 else:
     BEAUTIFULSOUP_BUILDER = 'lxml'  # pragma: no cover
 
-# a regular expression to match paths against the Spark History Server API
-PROXY_PATH_RE = re.compile(r'\/api\/.*')
-
 # a tuple of tuples with tag names and their attribute to automatically fix
 PROXY_ATTRIBUTES = (
     (('a', 'link'), 'href'),
@@ -54,7 +51,6 @@ class SparkHistory(LoggingConfigurable):
         """
         Replace all the links with our prefixed handler links, e.g.:
 
-        /proxy/application_1467283586194_0015/static/styles.css' or
         /static/styles.css
 
         with
@@ -65,8 +61,5 @@ class SparkHistory(LoggingConfigurable):
         for tags, attribute in PROXY_ATTRIBUTES:
             for tag in soup.find_all(tags, **{attribute: True}):
                 value = tag[attribute]
-                match = PROXY_PATH_RE.match(value)
-                if match is not None:
-                    value = match.groups()[0]
                 tag[attribute] = url_path_join(self.proxy_url, value)
         return str(soup)
