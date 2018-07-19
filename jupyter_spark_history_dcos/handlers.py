@@ -31,13 +31,13 @@ class SparkHistoryHandler(IPythonHandler):
                                  {'backend_url': url},
                                  {'backend_ip': backend_ip},
                                  {'backend_port': backend_port})
-        #else:
-        #    content_type = response.headers['Content-Type']
-        #    if 'text/html' in content_type:
-        #        content = self.spark_history.replace(response.body)
-        #    else:
-        #        # Probably binary response, send it directly.
-        #        content = response.body
+        # else:
+        #     content_type = response.headers['Content-Type']
+        #     if 'text/html' in content_type:
+        #         content = self.spark_history.replace(response.body)
+        #     else:
+        #         # Probably binary response, send it directly.
+        #         content = response.body
         self.set_header('Content-Type', content_type)
         self.write(content)
         self.finish()
