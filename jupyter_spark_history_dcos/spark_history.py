@@ -68,5 +68,5 @@ class SparkHistory(LoggingConfigurable):
                 match = PROXY_PATH_RE.match(value)
                 if match is not None:
                     value = match.groups()[0]
-                tag[attribute] = url_path_join(self.proxy_root, value)
+                tag[attribute] = url_path_join(self.proxy_url, value)
         return str(soup)
