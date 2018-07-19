@@ -32,8 +32,9 @@ class SparkHistoryHandler(IPythonHandler):
                                  {'backend_url': url},
                                  {'backend_ip': backend_ip},
                                  {'backend_port': backend_port})
-        # else:
-        #     content_type = response.headers['Content-Type']
+        else:
+            content_type = response.headers['Content-Type']
+            content = response.body
         #     if 'text/html' in content_type:
         #         content = self.spark_history.replace(response.body)
         #     else:
