@@ -19,17 +19,22 @@ class SparkHistoryHandler(IPythonHandler):
         """
         http = httpclient.AsyncHTTPClient()
         url = self.spark_history.backend_url(self.request)
+        backend_ip = os.getenv('MESOS_CONTAINER_IP', '127.0.0.1')
+        backend_port = os.getenv('PORT_SPARKHISTORY', '18080')
         self.spark_history.log.debug('Fetching from Spark History %s', url)
         http.fetch(url, self.handle_response)
 
     def handle_response(self, response):
         if response.error:
             content_type = 'application/json'
-            content = json.dumps({'error': 'SPARK_HISTORY_SERVER_NOT_RUNNING'})
+            content = json.dumps({'error': 'SPARK_HISTORY_SERVER_NOT_RUNNING'},
+                                 {'backend_url': url},
+                                 {'backend_ip': backend_ip},
+                                 {'backend_port': backend_port})
         else:
             content_type = response.headers['Content-Type']
             if 'text/html' in content_type:
-                content = self.spark_history.replace(response.body)
+                #content = self.spark_history.replace(response.body)
             else:
                 # Probably binary response, send it directly.
                 content = response.body
