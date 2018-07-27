@@ -61,5 +61,5 @@ class SparkHistory(LoggingConfigurable):
         for tags, attribute in PROXY_ATTRIBUTES:
             for tag in soup.find_all(tags, **{attribute: True}):
                 value = tag[attribute]
-                tag[attribute] = url_path_join(self.proxy_url, value)
+                tag[attribute] = url_path_join(self.base_url, value)
         return str(soup)
