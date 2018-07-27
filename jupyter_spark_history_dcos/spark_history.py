@@ -34,7 +34,7 @@ class SparkHistory(LoggingConfigurable):
     ).tag(config=True)
 
     proxy_root = Unicode(
-        '/sparkhistory',
+        '/sparkhistory/',
         help='The URL path under which the Spark History will be proxied',
     )
 
@@ -46,20 +46,3 @@ class SparkHistory(LoggingConfigurable):
     def backend_url(self, request):
         request_path = request.uri[len(self.proxy_url):]
         return url_path_join(self.url, request_path)
-
-    def replace(self, content):
-        """
-        Replace all the links with our prefixed handler links, e.g.:
-
-        /static/styles.css
-
-        with
-
-        /sparkhistory/static/styles.css
-        """
-        soup = BeautifulSoup(content, BEAUTIFULSOUP_BUILDER)
-        for tags, attribute in PROXY_ATTRIBUTES:
-            for tag in soup.find_all(tags, **{attribute: True}):
-                value = tag[attribute]
-                tag[attribute] = url_path_join(self.base_url, value)
-        return str(soup)

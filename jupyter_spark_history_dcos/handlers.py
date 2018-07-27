@@ -14,9 +14,7 @@ class SparkHistoryHandler(IPythonHandler):
     @tornado.web.asynchronous
     def get(self):
         """
-        Fetch the requested URI from the Spark History Server, replace the
-        URLs in the response content for HTML responses or return
-        the verbatim response.
+        Fetch the requested URI from the Spark History Server
         """
         http = httpclient.AsyncHTTPClient()
         url = self.spark_history.backend_url(self.request)
